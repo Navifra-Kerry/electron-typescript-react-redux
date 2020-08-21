@@ -27,7 +27,7 @@ jobs:
       env:
         CI: false
       run :  npm run build
-    - name : electron build
-      env:
-        CI: false
-      run :  npm run release    
+    #- name : electron build
+    #   env:
+    #    CI: false
+    #  run :  npm run release    
