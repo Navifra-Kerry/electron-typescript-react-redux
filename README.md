@@ -1,7 +1,6 @@
 # electron-typescript-react-redux  
 
-example electron with typescript & react
-
+example electron with typescript & react ![Node.js](https://github.com/kerry-Cho/electron-typescript-react-redux/workflows/Node.js/badge.svg)
 # VS Code extension
 
 -   Debbugger for Chrome
