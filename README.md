@@ -28,7 +28,7 @@ example electron with typescript & react
 
     **VS Code select debugging options Electron: Renderer**
 
--   Packaging
+-   Electron Build
     ```
     npm run release
     ```
