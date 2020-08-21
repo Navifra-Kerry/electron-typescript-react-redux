@@ -1,6 +1,4 @@
-import {
-  app, ipcMain, BrowserWindow, BrowserWindowConstructorOptions, Menu, MenuItemConstructorOptions,
-} from 'electron';
+import { app, ipcMain, BrowserWindow, BrowserWindowConstructorOptions, Menu, MenuItemConstructorOptions } from 'electron';
 import { IpcMainProxy } from './common/ipcMainProxy';
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -9,58 +7,58 @@ let mainWindow: BrowserWindow;
 let ipcMainProxy: IpcMainProxy;
 
 function createWindow() {
-  const windowOptions: BrowserWindowConstructorOptions = {
-    width: 1024,
-    height: 768,
-    frame: process.platform === 'linux',
-    backgroundColor: '#272B30',
-    titleBarStyle: 'hidden',
-    show: false,
-    webPreferences: {
-      nodeIntegration: true,
-      backgroundThrottling: false,
-    },
-  };
-
-  const staticUrl = process.env.ELECTRON_START_URL || `file:///${__dirname}/index.html`;
-  if (process.env.ELECTRON_START_URL) {
-    windowOptions.webPreferences = {
-      webSecurity: false,
+    const windowOptions: BrowserWindowConstructorOptions = {
+        width: 1024,
+        height: 768,
+        frame: process.platform === 'linux',
+        backgroundColor: '#272B30',
+        titleBarStyle: 'hidden',
+        show: false,
+        webPreferences: {
+            nodeIntegration: true,
+            backgroundThrottling: false,
+        },
     };
-  }
 
-  mainWindow = new BrowserWindow(windowOptions);
-  mainWindow.loadURL(staticUrl);
-  mainWindow.maximize();
+    const staticUrl = process.env.ELECTRON_START_URL || `file:///${__dirname}/index.html`;
+    if (process.env.ELECTRON_START_URL) {
+        windowOptions.webPreferences = {
+            webSecurity: false,
+        };
+    }
 
-  // Emitted when the window is closed.
-  mainWindow.on('closed', () => {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
-    mainWindow = null;
-  });
+    mainWindow = new BrowserWindow(windowOptions);
+    mainWindow.loadURL(staticUrl);
+    mainWindow.maximize();
 
-  // Provides a more graceful experience and eliminates the white screen on load
-  // This event fires after the app first render
-  mainWindow.once('ready-to-show', () => {
-    mainWindow.show();
-  });
+    // Emitted when the window is closed.
+    mainWindow.on('closed', () => {
+        // Dereference the window object, usually you would store windows
+        // in an array if your app supports multi windows, this is the time
+        // when you should delete the corresponding element.
+        mainWindow = null;
+    });
 
-  registerContextMenu(mainWindow);
+    // Provides a more graceful experience and eliminates the white screen on load
+    // This event fires after the app first render
+    mainWindow.once('ready-to-show', () => {
+        mainWindow.show();
+    });
 
-  ipcMainProxy = new IpcMainProxy(ipcMain, mainWindow);
-  ipcMainProxy.register('RELOAD_APP', onReloadApp);
-  ipcMainProxy.register('TOGGLE_DEV_TOOLS', onToggleDevTools);
+    registerContextMenu(mainWindow);
+
+    ipcMainProxy = new IpcMainProxy(ipcMain, mainWindow);
+    ipcMainProxy.register('RELOAD_APP', onReloadApp);
+    ipcMainProxy.register('TOGGLE_DEV_TOOLS', onToggleDevTools);
 }
 
 function onReloadApp() {
-  mainWindow.reload();
-  return true;
+    mainWindow.reload();
+    return true;
 }
 
 function onToggleDevTools() {
-  mainWindow.webContents.toggleDevTools();
+    mainWindow.webContents.toggleDevTools();
 }
 
 /**
@@ -68,19 +66,18 @@ function onToggleDevTools() {
  * @param browserWindow The browser window to apply the context-menu items
  */
 function registerContextMenu(browserWindow: BrowserWindow): void {
-  const menuItems: MenuItemConstructorOptions[] = [
-    {
-      label: 'File',
-      submenu: [{ role: 'quit' }],
-    },
-    {
-      label: 'View',
-      submenu: [{ role: 'reload' }, { type: 'separator' }, { role: 'toggleDevTools' }, { type: 'separator' }],
-    },
-    { role: 'windowMenu' },
-  ];
-  const menu = Menu.buildFromTemplate(menuItems);
-  Menu.setApplicationMenu(menu);
+    const menuItems: MenuItemConstructorOptions[] = [
+        {
+            label: 'File',
+            submenu: [{ role: 'quit' }],
+        },
+        {
+            label: 'View',
+            submenu: [{ role: 'reload' }, { type: 'separator' }, { role: 'toggleDevTools' }, { type: 'separator' }],
+        },
+    ];
+    const menu = Menu.buildFromTemplate(menuItems);
+    Menu.setApplicationMenu(menu);
 }
 
 // This method will be called when Electron has finished
@@ -90,17 +87,17 @@ app.on('ready', createWindow);
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
-  // On OS X it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
+    // On OS X it is common for applications and their menu bar
+    // to stay active until the user quits explicitly with Cmd + Q
+    if (process.platform !== 'darwin') {
+        app.quit();
+    }
 });
 
 app.on('activate', () => {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (mainWindow === null) {
-    createWindow();
-  }
+    // On OS X it's common to re-create a window in the app when the
+    // dock icon is clicked and there are no other windows open.
+    if (mainWindow === null) {
+        createWindow();
+    }
 });
