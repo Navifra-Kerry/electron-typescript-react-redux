@@ -27,10 +27,6 @@ jobs:
       env:
         CI: false
       run :  npm run build
-    - name : test
-      env:
-        CI: false
-      run :  npm run test 
     - name : electron build
       env:
         CI: false
