@@ -1,0 +1,55 @@
+@import './assets/sass/theme.scss';
+@import './components/common/common.scss';
+
+.app {
+    &-shell {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    &-main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        font-size: calc(10px + 2vmin);
+        color: white;
+    }
+}
+
+.app-help-menu-icon {
+    color: #ccc;
+    display: inline-block;
+
+    &:hover {
+        color: #fff;
+        background-color: $lighter-2;
+        cursor: pointer;
+    }
+}
+
+.app-main .logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .app-main .logo {
+        animation: app-logo-spin infinite 20s linear;
+    }
+}
+
+.app-link {
+    color: #61dafb;
+}
+
+@keyframes app-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
