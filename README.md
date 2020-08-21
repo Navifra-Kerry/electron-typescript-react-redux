@@ -1,4 +1,6 @@
-# electron-typescript-react-redux
+# electron-typescript-react-redux  
+
+example electron with typescript & react
 
 # VS Code extension
 
