@@ -1,4 +1,6 @@
-# electron-typescript-react-redux
+# electron-typescript-react-redux  
+
+example electron with typescript & react
 
 # VS Code extension
 
@@ -26,7 +28,7 @@
 
     **VS Code select debugging options Electron: Renderer**
 
--   Packaging
+-   Electron Build
     ```
     npm run release
     ```
